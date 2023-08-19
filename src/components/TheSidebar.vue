@@ -1,8 +1,5 @@
 <template>
-  <v-navigation-drawer
-    expand-on-hover
-    rail
-  >
+  <v-navigation-drawer expand-on-hover>
     <v-list>
       <v-list-item
         prepend-avatar="https://cdn3.emoji.gg/emojis/5727-pepe-smirk.png"
@@ -11,7 +8,7 @@
       />
     </v-list>
 
-    <v-divider></v-divider>
+    <v-divider />
 
     <v-list density="compact" nav>
       <v-list-item
