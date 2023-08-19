@@ -1,9 +1,6 @@
 <template>
-  <v-main>
-    <router-view />
-  </v-main>
+  DASHBOARD
 </template>
 
 <script setup>
-  //
 </script>
