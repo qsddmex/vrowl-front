@@ -1,0 +1,3 @@
+<template>
+  UPLOAD VIDEO
+</template>
