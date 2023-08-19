@@ -14,9 +14,35 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-folder" title="Dashboard" value="dashboard" to="/" />
-      <v-list-item prepend-icon="mdi-account-multiple" title="Aulas" value="classes" to="/classes" />
-      <v-list-item prepend-icon="mdi-star" title="Uploads" value="uploads" to="/uploads" />
+      <v-list-item
+        v-for="(item, index) in sidebarItems"
+        :key="index"
+        :prepend-icon="item.icon"
+        :title="item.title"
+        :value="item"
+        :to="item.route"
+        color="primary"
+      />
     </v-list>
   </v-navigation-drawer>
 </template>
+
+<script setup>
+const sidebarItems = [
+  {
+    title: 'Dashboard',
+    route: '/',
+    icon: 'fas fa-chart-bar',
+  },
+  {
+    title: 'Aulas',
+    route: '/classes',
+    icon: 'fas fa-chalkboard-teacher',
+  },
+  {
+    title: 'Uploads',
+    route: '/uploads',
+    icon: 'fas fa-file-upload',
+  },
+];
+</script>
