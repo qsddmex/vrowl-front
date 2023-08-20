@@ -1,3 +1,0 @@
-<template>
-  UPLOAD TEXT
-</template>

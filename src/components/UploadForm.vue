@@ -73,7 +73,12 @@
       </v-row>
 
       <v-row no-gutters justify="end">
-        <v-btn :disabled="!valid" color="success" @click="submitForm">
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          :loading="isRequestingData"
+          @click="submitForm"
+        >
           Submeter aula
         </v-btn>
       </v-row>
@@ -84,6 +89,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import axios from 'axios';
+// import { createMock } from './mock';
 
 const valid = ref(false);
 const className = ref('');
@@ -103,16 +109,7 @@ const alternativesInputSize = {
   max: 5,
 };
 
-const uploadCreatePayload = computed(() => {
-  return {
-    file: file.value,
-    name: className.value,
-    questions_qty: questionsQuantity.value,
-    alternative_qty: alternativesQuantity.value,
-    context_tags: contextTags.value,
-    categories: [],
-  };
-});
+const isRequestingData = ref(false);
 
 function addValue() {
   if (contextInputValue.value.trim() !== '') {
@@ -125,26 +122,36 @@ function removeValue(index) {
   contextTags.value.splice(index, 1);
 };
 
+const emit = defineEmits(['submit-success']);
+
 async function submitForm() {
-  const formData = new FormData();
-
-  formData.append('file', file.value[0]);
-  formData.append('name', className.value);
-  formData.append('questions_qty', questionsQuantity.value);
-  formData.append('alternative_qty', alternativesQuantity.value);
-  formData.append('context_tags', contextTags.value);
-  formData.append('categories', []);
-
   try {
+    isRequestingData.value = true;
+
+    const formData = new FormData();
+    formData.append('file', file.value[0]);
+    formData.append('name', className.value);
+    formData.append('questions_qty', questionsQuantity.value);
+    formData.append('alternative_qty', alternativesQuantity.value);
+    formData.append('context_tags', contextTags.value);
+    formData.append('categories', []);
+
     const response = await axios.post('http://my-server/create', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
 
-    console.log('Arquivo enviado com sucesso!', response.data);
+    // mock
+    // const response = {
+    //   data: createMock,
+    // };
+
+    emit('submit-success', response.data);
   } catch (error) {
     console.error('Erro ao enviar arquivo:', error);
+  } finally {
+    isRequestingData.value = false;
   }
 }
 
