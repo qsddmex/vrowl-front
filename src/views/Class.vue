@@ -11,6 +11,10 @@
             status: {{ item.status }}
           </v-card-subtitle>
 
+          <v-card-text>
+            {{ item.report ? 'Relatorio finalizado' : 'Relatório não gerado' }}
+          </v-card-text>
+
           <v-card-actions>
             <v-btn
               color="primary"
