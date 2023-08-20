@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="(item, index) in classQuestions" :key="index" cols="12" md="3">
+      <v-col v-for="(item, index) in classQuestions" :key="index" cols="12" md="12">
         <v-card>
           <v-card-title>
             {{ item.question }}
@@ -10,6 +10,17 @@
           <v-card-subtitle>
             Alternativa correta: ({{ item.correct_answer }})
           </v-card-subtitle>
+
+          <v-card-text>
+            <div class="upload-class-preview__alternatives-wrapper">
+              <p
+                v-for="(alternative, index) in item.answers"
+                :key="index"
+              >
+                {{ formatAlternativeText(alternative) }}
+              </p>
+            </div>
+          </v-card-text>
 
           <v-card-actions>
             <v-btn
@@ -36,6 +47,7 @@
                 <v-btn
                   color="success"
                   block
+                  :loading="isRequestingData"
                   @click="updateItem(item)"
                 >
                   Enviar resposta e substituir
@@ -74,6 +86,12 @@ onMounted(() => {
 function toggleItemShow(item) {
   item.show = !item.show;
 }
+
+function formatAlternativeText(alternative) {
+  const { key: option, value: answer } = alternative;
+
+  return `(${option}) ${answer}`;
+};
 
 async function updateItem(item) {
   if (!item.updateReason) return;
@@ -133,4 +151,9 @@ async function updateItem(item) {
 </script>
 
 <style lang="scss">
+.upload-class-preview__alternatives-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
 </style>
