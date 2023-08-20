@@ -72,11 +72,25 @@
         </v-col>
       </v-row>
 
+      <v-row>
+        <v-col cols="12" md="12">
+          <p>
+            Data limite para finalização da prova:
+          </p>
+          <vue-date-picker
+            v-model="selectedDate"
+            :min-date="new Date()"
+            model-type="yyyy-MM-dd HH:mm:ss"
+          />
+        </v-col>
+      </v-row>
+
       <v-row no-gutters justify="end">
         <v-btn
-          :disabled="!valid"
+          :disabled="!valid || !selectedDate"
           color="success"
           :loading="isRequestingData"
+          class="upload-class-form__submit-button"
           @click="submitForm"
         >
           Submeter aula
@@ -90,6 +104,8 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { createMock } from './mock';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const valid = ref(false);
 const className = ref('');
@@ -98,8 +114,9 @@ const alternativesQuantity = ref(2);
 const contextInputValue = ref('');
 const contextTags = ref([]);
 const file = ref(null);
+const selectedDate = ref(null);
 
-const classNameMaxSize = 20;
+const classNameMaxSize = 50;
 const questionsInputSize = {
   min: 1,
   max: 20,
@@ -135,6 +152,7 @@ async function submitForm() {
     // formData.append('alternative_qty', alternativesQuantity.value);
     // formData.append('context_tags', contextTags.value);
     // formData.append('categories', []);
+    // formData.append('close_at', selectedDate.value);
 
     // const response = await axios.post('http://my-server/api/quizzes', formData, {
     //   headers: {
@@ -207,5 +225,9 @@ const fileRules = [
   column-gap: 8px;
   row-gap: 4px;
   flex-wrap: wrap;
+}
+
+.upload-class-form__submit-button {
+  margin-top: 24px;
 }
 </style>
