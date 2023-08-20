@@ -87,9 +87,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';
-// import { createMock } from './mock';
+import { createMock } from './mock';
 
 const valid = ref(false);
 const className = ref('');
@@ -128,24 +128,24 @@ async function submitForm() {
   try {
     isRequestingData.value = true;
 
-    const formData = new FormData();
-    formData.append('file', file.value[0]);
-    formData.append('name', className.value);
-    formData.append('questions_qty', questionsQuantity.value);
-    formData.append('alternative_qty', alternativesQuantity.value);
-    formData.append('context_tags', contextTags.value);
-    formData.append('categories', []);
+    // const formData = new FormData();
+    // formData.append('file', file.value[0]);
+    // formData.append('name', className.value);
+    // formData.append('questions_qty', questionsQuantity.value);
+    // formData.append('alternative_qty', alternativesQuantity.value);
+    // formData.append('context_tags', contextTags.value);
+    // formData.append('categories', []);
 
-    const response = await axios.post('http://my-server/create', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    // const response = await axios.post('http://my-server/api/quizzes', formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data'
+    //   }
+    // });
 
     // mock
-    // const response = {
-    //   data: createMock,
-    // };
+    const response = {
+      data: createMock,
+    };
 
     emit('submit-success', response.data);
   } catch (error) {

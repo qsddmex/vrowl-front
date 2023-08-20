@@ -58,6 +58,18 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row justify="end" no-gutters>
+      <v-btn
+        color="success"
+        :loading="isRequestingData"
+        size="large"
+        class="upload-class-preview__finish-button"
+        @click="finishClassCreation()"
+      >
+        Confirmar criação de aula
+      </v-btn>
+    </v-row>
   </v-container>
 </template>
 
@@ -74,6 +86,8 @@ const props = defineProps({
 
 const classQuestions = ref([]);
 const isRequestingData = ref(false);
+
+const emit = defineEmits(['preview-success']);
 
 onMounted(() => {
   classQuestions.value = props.formResponseData.questions.map(question => ({
@@ -93,43 +107,65 @@ function formatAlternativeText(alternative) {
   return `(${option}) ${answer}`;
 };
 
+async function finishClassCreation() {
+  try {
+    isRequestingData.value = true;
+
+    // const response = await axios.patch(`http://my-server/api/quizzes/${props.formResponseData.id}/confirm`);
+
+    const response = {
+      data: {
+        shareable_link: 'https://meu-link.com/123456-654433-56755',
+      },
+    };
+
+    emit('preview-success', response.data);
+    console.log('Aula criada com sucesso', response.data);
+  } catch (error) {
+    console.error('Erro ao finalizar:', error);
+  } finally {
+    isRequestingData.value = false;
+  }
+};
+
 async function updateItem(item) {
   if (!item.updateReason) return;
 
   try {
     isRequestingData.value = true;
 
-    const updatePayload = {
-      update_reason: item.updateReason,
-    };
-
-    const response = await axios.put(`http://my-server/update/${item.id}`, updatePayload);
-
-    // const response = {
-    //   data: {
-    //     id: item.id,
-    //     question: 'Pergunta atualizada?',
-    //     correct_answer: 'c',
-    //     answers: [
-    //       {
-    //         key: 'a',
-    //         value: '<Minhas teta>',
-    //       },
-    //       {
-    //         key: 'b',
-    //         value: 'Disgraça',
-    //       },
-    //       {
-    //         key: 'c',
-    //         value: 'Baianinho de Mauá',
-    //       },
-    //       {
-    //         key: 'd',
-    //         value: 'Hackearam meu zap',
-    //       },
-    //     ]
-    //   }
+    // const updatePayload = {
+    //   update_reason: item.updateReason,
     // };
+
+    // const response = await axios.patch(`http://my-server/api/questions/${item.id}`, updatePayload);
+
+    // mock
+    const response = {
+      data: {
+        id: item.id,
+        question: 'Pergunta atualizada?',
+        correct_answer: 'c',
+        answers: [
+          {
+            key: 'a',
+            value: '<Minhas teta>',
+          },
+          {
+            key: 'b',
+            value: 'Disgraça',
+          },
+          {
+            key: 'c',
+            value: 'Baianinho de Mauá',
+          },
+          {
+            key: 'd',
+            value: 'Hackearam meu zap',
+          },
+        ]
+      }
+    };
 
     const itemIndex = classQuestions.value.findIndex(question => question.id === item.id)
 
@@ -155,5 +191,9 @@ async function updateItem(item) {
   display: flex;
   flex-direction: column;
   row-gap: 4px;
+}
+
+.upload-class-preview__finish-button {
+  margin-top: 24px;
 }
 </style>
