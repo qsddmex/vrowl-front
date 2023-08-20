@@ -13,12 +13,17 @@ const routes = [
   },
   {
     path: '/classes',
-    name: 'Classes',
+    name: 'Class',
     meta: {
       title: 'Aulas',
       description: 'Ea amet veniam velit magna et magna adipisicing non. Ipsum duis fugiat eiusmod laboris enim dolore reprehenderit aliquip Lorem amet.'
     },
     component: () => import(/* webpackChunkName: "class" */ '@/views/Class.vue'),
+  },
+  {
+    name: 'ClassDetail',
+    path: '/classes/:id',
+    component: () => import(/* webpackChunkName: "class" */ '@/views/ClassDetail.vue'),
   },
   {
     path: '/uploads',
