@@ -111,7 +111,7 @@ async function finishClassCreation() {
   try {
     isRequestingData.value = true;
 
-    const response = await axios.patch(`http://my-server/api/quizzes/${props.formResponseData.id}/confirm`);
+    const response = await axios.patch(`http://localhost:3000/api/quizzes/${props.formResponseData.quiz_id}/confirm`);
 
     // mock
     // const response = {
@@ -139,7 +139,7 @@ async function updateItem(item) {
       update_reason: item.updateReason,
     };
 
-    const response = await axios.patch(`http://my-server/api/questions/${item.id}`, updatePayload);
+    const response = await axios.patch(`http://localhost:3000/api/questions/${item.id}`, updatePayload);
 
     // mock
     // const response = {

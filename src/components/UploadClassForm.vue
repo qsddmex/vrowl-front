@@ -154,7 +154,7 @@ async function submitForm() {
     formData.append('categories', []);
     formData.append('close_at', selectedDate.value);
 
-    const response = await axios.post('http://my-server/api/quizzes', formData, {
+    const response = await axios.post('http://localhost:3000/api/quizzes', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

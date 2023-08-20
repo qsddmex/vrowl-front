@@ -31,7 +31,8 @@
 </template>
 
 <script setup>
-import { onMounted} from 'vue';
+import axios from 'axios';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useClassStore } from '@/store/class';
 
@@ -46,44 +47,44 @@ function goToClassDetails(classItem) {
 
 async function fetchClasses() {
   try {
-    // const response = await axios.get('https://meu-server/api/quizzes');
+    const response = await axios.get('http://localhost:3000/api/quizzes');
 
     // mock
-    const response = {
-      data: [
-        {
-          id: 1,
-          name: 'Meu quiz 1',
-          status: 'done',
-          report: 'EU TENHO MEU REPORT OLHA SO',
-        },
-        {
-          id: 2,
-          name: 'Meu quiz 2',
-          status: 'done'
-        },
-        {
-          id: 3,
-          name: 'Meu quiz 3',
-          status: 'done'
-        },
-        {
-          id: 4,
-          name: 'Meu quiz 4',
-          status: 'done'
-        },
-        {
-          id: 5,
-          name: 'Meu quiz 5',
-          status: 'done'
-        },
-        {
-          id: 6,
-          name: 'Meu quiz 6',
-          status: 'done'
-        },
-      ]
-    };
+    // const response = {
+    //   data: [
+    //     {
+    //       id: 1,
+    //       name: 'Meu quiz 1',
+    //       status: 'done',
+    //       report: 'EU TENHO MEU REPORT OLHA SO',
+    //     },
+    //     {
+    //       id: 2,
+    //       name: 'Meu quiz 2',
+    //       status: 'done'
+    //     },
+    //     {
+    //       id: 3,
+    //       name: 'Meu quiz 3',
+    //       status: 'done'
+    //     },
+    //     {
+    //       id: 4,
+    //       name: 'Meu quiz 4',
+    //       status: 'done'
+    //     },
+    //     {
+    //       id: 5,
+    //       name: 'Meu quiz 5',
+    //       status: 'done'
+    //     },
+    //     {
+    //       id: 6,
+    //       name: 'Meu quiz 6',
+    //       status: 'done'
+    //     },
+    //   ]
+    // };
 
     classStore.setClasses(response.data);
   } catch (error) {
