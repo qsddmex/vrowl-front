@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" class="upload-form">
+  <v-form v-model="valid" class="upload-class-form">
     <v-container>
       <v-row>
         <v-col cols="12" md="12">
@@ -21,7 +21,7 @@
             @keydown.enter.prevent="addValue"
           ></v-text-field>
 
-          <div class="upload-form__badges-wrapper">
+          <div class="upload-class-form__badges-wrapper">
             <v-chip
               v-for="(value, index) in contextTags"
               :key="index"
@@ -198,11 +198,11 @@ const fileRules = [
 </script>
 
 <style lang="scss">
-.upload-form {
+.upload-class-form {
   width: 700px;
 }
 
-.upload-form__badges-wrapper {
+.upload-class-form__badges-wrapper {
   display: flex;
   column-gap: 8px;
   row-gap: 4px;

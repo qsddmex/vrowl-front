@@ -1,5 +1,5 @@
 <template>
-  <UploadForm
+  <UploadClassForm
     v-if="currentStep === 'form'"
     @submit-success="handleFormUploadSuccess"
   />
@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import UploadForm from '@/components/UploadForm.vue';
+import UploadClassForm from '@/components/UploadClassForm.vue';
 import UploadClassPreview from '@/components/UploadClassPreview.vue';
 import UploadClassSuccess from '@/components/UploadClassSuccess.vue';
 
