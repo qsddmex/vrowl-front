@@ -4,7 +4,7 @@
       <v-col v-for="(item, index) in classQuestions" :key="index" cols="12" md="12">
         <v-card>
           <v-card-title>
-            {{ item.question }}
+            {{ item.statement }}
           </v-card-title>
 
           <v-card-subtitle>
@@ -14,7 +14,7 @@
           <v-card-text>
             <div class="upload-class-preview__alternatives-wrapper">
               <p
-                v-for="(alternative, index) in item.answers"
+                v-for="(alternative, index) in item.alternatives"
                 :key="index"
               >
                 {{ formatAlternativeText(alternative) }}
@@ -102,9 +102,9 @@ function toggleItemShow(item) {
 }
 
 function formatAlternativeText(alternative) {
-  const { key: option, value: answer } = alternative;
+  const { key: option, text } = alternative;
 
-  return `(${option}) ${answer}`;
+  return `(${option}) ${text}`;
 };
 
 async function finishClassCreation() {
@@ -139,7 +139,7 @@ async function updateItem(item) {
       update_reason: item.updateReason,
     };
 
-    const response = await axios.patch(`http://localhost:3000/api/questions/${item.id}`, updatePayload);
+    const response = await axios.patch(`http://localhost:3000/api/questions/${item.question_id}`, updatePayload);
 
     // mock
     // const response = {
@@ -168,7 +168,7 @@ async function updateItem(item) {
     //   }
     // };
 
-    const itemIndex = classQuestions.value.findIndex(question => question.id === item.id)
+    const itemIndex = classQuestions.value.findIndex(question => question.question_id === item.question_id)
 
     if (itemIndex !== -1) {
       classQuestions.value[itemIndex] = response.data;
