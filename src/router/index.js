@@ -4,12 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
-    meta: {
-      title: 'Dashboard',
-      description: 'Ea amet veniam velit magna et magna adipisicing non. Ipsum duis fugiat eiusmod laboris enim dolore reprehenderit aliquip Lorem amet.'
-    },
-    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
+    name: 'Home',
+    redirect: '/uploads'
   },
   {
     path: '/classes',

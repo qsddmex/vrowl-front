@@ -65,7 +65,7 @@
           <v-file-input
             v-model="file"
             :rules="fileRules"
-            label="Upload de vídeo"
+            label="Upload de arquivo"
             prepend-icon="fas fa-file-import"
             show-size
           />

@@ -27,19 +27,14 @@
 <script setup>
 const sidebarItems = [
   {
-    title: 'Dashboard',
-    route: '/',
-    icon: 'fas fa-chart-bar',
+    title: 'Uploads',
+    route: '/uploads',
+    icon: 'fas fa-file-upload',
   },
   {
     title: 'Aulas',
     route: '/classes',
     icon: 'fas fa-chalkboard-teacher',
-  },
-  {
-    title: 'Uploads',
-    route: '/uploads',
-    icon: 'fas fa-file-upload',
   },
 ];
 </script>
