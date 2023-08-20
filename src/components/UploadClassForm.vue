@@ -103,7 +103,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import { createMock } from './mock';
+// import { createMock } from './mock';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -145,25 +145,25 @@ async function submitForm() {
   try {
     isRequestingData.value = true;
 
-    // const formData = new FormData();
-    // formData.append('file', file.value[0]);
-    // formData.append('name', className.value);
-    // formData.append('questions_qty', questionsQuantity.value);
-    // formData.append('alternative_qty', alternativesQuantity.value);
-    // formData.append('context_tags', contextTags.value);
-    // formData.append('categories', []);
-    // formData.append('close_at', selectedDate.value);
+    const formData = new FormData();
+    formData.append('file', file.value[0]);
+    formData.append('name', className.value);
+    formData.append('questions_qty', questionsQuantity.value);
+    formData.append('alternative_qty', alternativesQuantity.value);
+    formData.append('context_tags', contextTags.value);
+    formData.append('categories', []);
+    formData.append('close_at', selectedDate.value);
 
-    // const response = await axios.post('http://my-server/api/quizzes', formData, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data'
-    //   }
-    // });
+    const response = await axios.post('http://my-server/api/quizzes', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
 
     // mock
-    const response = {
-      data: createMock,
-    };
+    // const response = {
+    //   data: createMock,
+    // };
 
     emit('submit-success', response.data);
   } catch (error) {
